@@ -10,13 +10,13 @@ from diffusers import StableDiffusionPipeline, DiffusionPipeline, DDPMPipeline, 
 from PIL import Image, ImageShow
         
 prompt_config = {
-    'source' : 'bible.txt',
-    'key' : 'bible',
+    'source' : 'sg1.txt',
+    'key' : 'sg1',
     'prompt_override' : None,
-    'chapter_split_regex' : 'Gen.\d+',
+    'chapter_split_regex' : 'Season\d+',
     'prompt_split_regex' : '\n',
     'max_chapters' : 1,
-    'max_entries_per_chapter' : 25
+    'max_entries_per_chapter' : 9
 }
 
 generation_config = {
@@ -34,44 +34,16 @@ generation_config = {
 
 style_configs = [
     {
-        'style' : 'no text hdr 4k 8k hyperreal photography nature ansel adams',
+        'style' : 'no text hdr 4k 8k hyperreal photography',
         'file_tag' : 'nature',
-        'weight' : 0.8,
-        'last_image' : None,
-        'images' : []
-    },
-    {
-        'style' : 'no text charcoal line art hyperfine davinci michelangelo',
-        'file_tag' : 'davinci',
         'weight' : 0.9,
         'last_image' : None,
         'images' : []
     },
     {
-        'style' : 'no text cyberpunk',
-        'file_tag' : 'cyberpunk',
-        'weight' : 0.8,
-        'last_image' : None,
-        'images' : []
-    },
-    {
-        'style' : '',
-        'file_tag' : 'text',
+        'style' : 'no text hdr charcoal hyperfine line drawing',
+        'file_tag' : 'charcoal',
         'weight' : 0.1,
-        'last_image' : None,
-        'images' : []
-    },
-    {
-        'style' : 'no text jesus comes down from the mount',
-        'file_tag' : 'jesus',
-        'weight' : 0.2,
-        'last_image' : None,
-        'images' : []
-    },
-    {
-        'style' : 'no text god angel uderwater',
-        'file_tag' : 'cyberpunk',
-        'weight' : 0.2,
         'last_image' : None,
         'images' : []
     }
@@ -82,7 +54,7 @@ def create_folder():
     progresive_text = 'progresive' if generation_config['progresive'] else 'independent'
     epoch = datetime.datetime.now()
     styles = ' '.join([style['file_tag'] for style in style_configs])
-    folder = f"{prompt_config['key']}/{progresive_text}/{styles}/{epoch}"
+    folder = f"output/{prompt_config['key']}/{progresive_text}/{styles}/{epoch}"
     os.system(f"mkdir -p '{folder}'")
     return folder
 
@@ -106,9 +78,8 @@ def create_pipelines():
     blank_pipe = StableDiffusionPipeline.from_pretrained(model_id, use_auth_token=True)
     blank_pipe = blank_pipe.to(device)
 
-    if generation_config['progresive']:
-        img2img_pipe = StableDiffusionImg2ImgPipeline.from_pretrained(model_id, use_auth_token=True)
-        img2img_pipe = img2img_pipe.to(device)
+    img2img_pipe = StableDiffusionImg2ImgPipeline.from_pretrained(model_id, use_auth_token=True)
+    img2img_pipe = img2img_pipe.to(device)
         
     return blank_pipe, img2img_pipe
     
