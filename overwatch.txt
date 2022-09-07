@@ -1,0 +1,33 @@
+Season1
+Ana
+Ashe
+Baptiste
+Bastion
+Brigitte
+Cassidy
+d.va
+doomfist
+echo
+genji
+hanzo
+junkrat
+lucio
+mei
+mercy
+moria
+orisa
+pharrah
+reaper
+reinhardt
+roadhog
+sigma
+soldier: 76
+sombra
+symmetra
+torbjorn
+tracer
+widowmaker
+winston
+wrecking ball
+zarya
+zentatta
