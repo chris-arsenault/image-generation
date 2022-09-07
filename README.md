@@ -50,8 +50,25 @@ This section configures multiple style to be applied to each prompt.  Each style
 
 | Key      | Type | Description |
 | ----------- | ----------- | ----------- |
-| style | Text | Styles to apply to each prompt.  Generally names of artists or art styles, but anything can be used. | 
+| style | Text | Styles to apply to each prompt.  Generally names of artists or art styles, but anything can be used. Note: 'no text' should generally added or else... lots of text appears. | 
 | file_tag | Text | Short description used to create file names. | 
 | weight | Float | Relative weight of the prompt in the overall prompt set.  Modifys the number of iterations run with the prompt.  0 would be no iterations, 1 would be max iterations. | 
 | last_image | None | Used to store images while generation is happening. Do Not modify. | 
 | images | Empty Array | Used to store images while generation is happening. Do Not modify. | 
+
+
+## Examples
+### Each verse of Genesis independent and in the style of nature photography
+* prompt set bible.txt with 1 chapter
+* progressive, interleave, cycle_styles all set to false.
+* One style with the style "no text hdr 4k 8k hyperreal photography nature ansel adams"
+
+### Each episode title for the first season of Stargate SG-1, using each image as input to the next for more coherence.  Apply a heavy weight to photography and a bit of weight to charcoal drawing.
+* prompt set sg1.txt with 1 chapter
+* progressive, interleave, set to true, cycle_styles set to false.
+* One style with the style "no text hdr 4k 8k hyperreal photography stargate" and weight set to 0.9
+* One style with the style "no text hdr charcoal hyperfine line drawing" and weight set to 0.1
+
+## Next Steps
+* Enable mutliple styles being applied to an image without using progressive on the prompt set.
+
